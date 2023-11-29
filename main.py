@@ -4,6 +4,7 @@ from gpt4all import GPT4All
 import whisper
 import time
 import threading
+import pyttsx3
 
 model = GPT4All("C:\\Users\\nickq\\AppData\\Roaming\\nomic.ai\\ggml-model-gpt4all-falcon-q4_0.bin")
 
@@ -13,6 +14,15 @@ base_model = whisper.load_model(base_model_path)
 
 listening_for_input = False
 current_state = "idle"  # States: "idle", "transcribing"
+
+def onStart(name):
+    print('Starting to speak:', name)
+
+def onEnd(name, completed):
+    if completed:
+        print('Speech completed successfully:', name)
+    else:
+        print('Speech interrupted:', name)
 
 def log(message):
     current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -26,8 +36,16 @@ def process_question(prompt_text):
         else:
             output = model.generate(prompt_text, max_tokens=200)
             log(f'GPT4All response: {output}')
+            text_to_speech(output)
     except Exception as e:
         log(f"Error processing question: {e}")
+
+def text_to_speech(text):
+    engine = pyttsx3.init()
+    engine.connect('started-utterance', onStart)
+    engine.connect('finished-utterance', onEnd)
+    engine.say(text)
+    engine.runAndWait()
 
 def start_transcription():
     global listening_for_input
