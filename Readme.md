@@ -1,5 +1,7 @@
 # Proyecto de Transcripción y Respuesta por Voz Taller UNI 
 Este proyecto consiste en un script en Python que utiliza la biblioteca SpeechRecognition para transcribir voz a texto, GPT-4 All para generar respuestas basadas en texto, y Whisper para transcribir el contenido de archivos de audio. Además, se emplea pyttsx3 para convertir el texto generado por GPT-4 All en voz.
+Puedes encontrar la presentación completa aquí: [Descargar diapositiva aquí](https://docs.google.com/presentation/d/18vWgptf_eyNaLqoRjFEz7VnOEopk83ln/edit?usp=sharing&ouid=114437431860079351706&rtpof=true&sd=true).
+
 
 ## Requisitos
 Asegúrate de tener instaladas las siguientes bibliotecas de Python:
