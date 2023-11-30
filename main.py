@@ -6,7 +6,7 @@ import time
 import threading
 import pyttsx3
 
-model = GPT4All("C:\\Users\\nickq\\AppData\\Roaming\\nomic.ai\\ggml-model-gpt4all-falcon-q4_0.bin")
+model = GPT4All("C:\\Users\\nickq\\AppData\\Roaming\\nomic.ai\\ggml-model-gpt4all-falcon-q4_0.bin",allow_download=False)
 
 r = sr.Recognizer()
 base_model_path = 'C:\\Users\\nickq\\.cache\\whisper\\base.pt'
@@ -42,6 +42,10 @@ def process_question(prompt_text):
 
 def text_to_speech(text):
     engine = pyttsx3.init()
+    #print('lista de voces')
+    #for voice in engine.getProperty('voices'):
+    #    print(voice)
+    engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0')
     engine.connect('started-utterance', onStart)
     engine.connect('finished-utterance', onEnd)
     engine.say(text)
